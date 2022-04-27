@@ -1,0 +1,14 @@
+.d-flex {
+    display: flex;
+}
+.column {
+    flex-direction: column;
+}
+input {
+    width: 300px;
+    margin: 5px;
+
+}
+.j-center {
+    justify-content: center;
+}

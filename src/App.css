@@ -1,38 +1,101 @@
-.App {
+.d-flex {
+  display: flex;
+}
+.column {
+  flex-direction: column;
+}
+.space-e {
+  justify-content: space-evenly;
+}
+h3 {
+  padding: 0;
+  margin: 0;
+}
+.space-b {
+  justify-content: space-between;
+}
+.j-center {
+  justify-content: center;
+}
+.single-forum-card {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #dedede;
+}
+.reply-card {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr 9fr;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  max-height: 200px;
+}
+
+.grow1 {
+  flex-grow: 1;
+}
+.grow2 {
+  flex-grow: 2;
+}
+
+.tabs {
+  width: 50%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   text-align: center;
+  background-color: white;
+  border-bottom: 2px solid lightgray;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tabs:hover {
+  background: #eeecec;
+  text-decoration: none;
+  cursor: pointer;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.color {
+  background: #f3f0f0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.user-profile-header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+.j-space-btw {
+  justify-content: space-between;
+}
+.content {
+  display: none;
+}
+.d-block {
+  display: block;
+}
+.userPhoto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.user-profile-sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.align-center {
+  align-items: center;
 }
+/*.user-profile {*/
+/*  display: grid;*/
+/*  grid-template-columns: 1fr 1fr 1fr;*/
+/*  margin: 5px;*/
+/*}*/
+/*.user-data {*/
+/*  display: grid;*/
+/*  grid-template-columns: 1fr 1fr;*/
+/*}*/

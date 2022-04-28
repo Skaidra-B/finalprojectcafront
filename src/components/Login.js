@@ -1,34 +1,36 @@
 import React, {useContext, useRef, useState} from 'react';
-import http from "../../plugins/http";
-// import mainContext from "../context/mainContext";
+import http from "../plugins/http";
+import mainContext from "../context/mainContext";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
 
-    // const {setLogged} = useContext(mainContext)
+    const {setUser} = useContext(mainContext)
 
     const emailRef = useRef()
     const passwordRef = useRef()
 
-    const [error, setError] = useState(null)
-    const [trigger, setTrigger] = useState(false)
+    const [status, setStatus] = useState(null)
+
+    const [stayLoggedIn, setStayLoggedIn] = useState(false)
+    const nav = useNavigate()
 
     async function auth() {
         const user = {
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            stayLogged: trigger
+            stayLoggedIn
         }
         const data = await http.post(user, "/login")
         console.log(data)
         if (data.success) {
-            // setLogged(data.user)
-            // // console.log(data.user)
-            // localStorage.setItem('isLogged', data.user.stayLogged)
-            // localStorage.setItem('email', data.user.email)
-            setError(null)
+            setUser(data.user)
+            setStatus(null)
+            nav("/")
+            if (stayLoggedIn) return localStorage.setItem("stayLoggedIn", "true")
+            console.log(data.user.username)
         } else {
-            setError(data.message)
-            // setLogged(null)
+            setStatus(data.message)
         }
     }
     return (
@@ -40,13 +42,15 @@ const Login = () => {
                 <input type="text" ref={passwordRef} placeholder="password"/>
             </div>
             <div className="j-center d-flex">
-                <label htmlFor="check2">Stay logged in</label>
-                <input onChange={() => setTrigger(!trigger)} type="checkbox" id="check2"/>
+                <label htmlFor="check2">Log me in automatically</label>
+                <input onChange={() => setStayLoggedIn(!stayLoggedIn)} type="checkbox" id="check2"/>
             </div>
             <div className="j-center d-flex">
                 <button onClick={auth}>Login</button>
             </div>
-            {error && <div>{error}</div>}
+            <div className="j-center d-flex">
+                <div>{status}</div>
+            </div>
         </div>
     );
 };

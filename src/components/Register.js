@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
-import http from "../../plugins/http";
-import "./style.css"
+import http from "../plugins/http";
+
 
 const Register = () => {
     const usernameRef = useRef()

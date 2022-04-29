@@ -28,7 +28,7 @@ const SingleForumView = () => {
     async function postReply() {
         const newPost = {
             _id: forum._id,
-            userId: user._id,
+            posterId: user._id,
             username: user.username,
             text: textRef.current.value
         }

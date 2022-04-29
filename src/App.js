@@ -12,6 +12,7 @@ import ProfilePage from "./pages/ProfilePage";
 import FavoritesPage from "./pages/FavoritesPage";
 import SingleForumPage from "./pages/SingleForumPage";
 import http from "./plugins/http";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
 

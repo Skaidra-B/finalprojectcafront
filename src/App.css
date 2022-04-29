@@ -90,6 +90,12 @@ h3 {
 .align-center {
   align-items: center;
 }
+.single-reply-in-user-account {
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid #dedede;
+  border-radius: 5px;
+}
 /*.user-profile {*/
 /*  display: grid;*/
 /*  grid-template-columns: 1fr 1fr 1fr;*/

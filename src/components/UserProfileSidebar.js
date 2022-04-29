@@ -1,11 +1,15 @@
-import React, {useContext, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import mainContext from "../context/mainContext";
 import {Button, Modal} from "react-bootstrap";
 import http from "../plugins/http";
 
 const UserProfileSidebar = () => {
 
-    const {user} = useContext(mainContext)
+    // useEffect(() => {
+    //
+    // }, [user.image])
+
+    const {setUser, setForums, user} = useContext(mainContext)
 
     const [showMessageModal, setShowMessageModal] = useState(false)
     const [status, setStatus] = useState(null)
@@ -22,12 +26,16 @@ const UserProfileSidebar = () => {
             picture: pictureRef.current.value
         }
         const data = await http.post(picture, "/change-picture")
-        console.log(data)
+        // console.log(data)
         if (data.success) {
             setStatus(null)
+            // setUser(data.refreshUsers)
+            // setForums(data.refreshForums)
+            setShowMessageModal(false)
         } else {
             setStatus(data.message)
         }
+
     }
 
 
@@ -43,8 +51,8 @@ const UserProfileSidebar = () => {
                     <Modal.Title>Change you profile picture</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <input ref={pictureRef} placeholder="Enter picture url here"/>
-                    {/*<p className={'msg-color'}>{error}</p>*/}
+                    <input ref={pictureRef} placeholder="Enter picture URL here"/>
+                    <div>{status}</div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseMessageModal}>

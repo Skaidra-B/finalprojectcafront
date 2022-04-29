@@ -29,6 +29,7 @@ const SingleForumView = () => {
         const newPost = {
             _id: forum._id,
             posterId: user._id,
+            posterImg: user.image,
             username: user.username,
             text: textRef.current.value
         }

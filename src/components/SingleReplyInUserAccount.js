@@ -11,7 +11,7 @@ const SingleReplyInUserAccount = ({post}) => {
     return (
         <div className={'single-reply-in-user-account'}>
             <div>Forum <b>{post.title}</b> created by {post.username} on {new Date(post.time).toLocaleDateString("lt-LT")} {new Date(post.time).toLocaleTimeString("lt-LT")}</div>
-            {userPostsOnly.map((x, i) => <div >
+            {userPostsOnly.map((x, i) => <div key={i}>
                 <hr/>
                 <div>{x.username} replied on {new Date(x.time).toLocaleDateString("lt-LT")} {new Date(x.time).toLocaleTimeString("lt-LT")}</div>
                 <div>{x.text}</div>

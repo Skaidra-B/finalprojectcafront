@@ -15,6 +15,7 @@ const Upload = () => {
     async function sendRequest() {
         const newForum = {
             ownerId: user._id,
+            ownerImg: user.image,
             title: titleRef.current.value
         }
         const data = await http.post(newForum, "/upload")

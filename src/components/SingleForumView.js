@@ -3,6 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import http from "../plugins/http";
 import SingleReply from "./SingleReply";
 import mainContext from "../context/mainContext";
+import Pagination from "./Pagination";
 
 const SingleForumView = () => {
 
@@ -13,8 +14,17 @@ const SingleForumView = () => {
     const {user} = useContext(mainContext);
     const textRef = useRef()
 
+    // mano posts = forum.posts array
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setsPostPerPage] = useState(5)
+    const indexOfLastPost = currentPage * postsPerPage
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+
+
     useEffect(() => {
         http.get("/get-single-forum/"+_id).then(res => {
+            // http.get(`/get-single-forum/${_id}/${currentPage}`)
             if (res.success) {
                 setForum(res.forum)
                 // setPostsAmount(res.forum.posts.length)
@@ -24,6 +34,19 @@ const SingleForumView = () => {
         })
 
     }, [])
+
+    function checkIfForum() {
+        if (forum) {
+            return forum.posts.slice(indexOfFirstPost, indexOfLastPost)
+        } else {
+            return forum.posts
+        }
+    }
+
+    // console.log(checkIfForum())
+
+    const paginate = pageNumber => setCurrentPage(pageNumber)
+
 
     async function postReply() {
         const newPost = {
@@ -57,11 +80,14 @@ const SingleForumView = () => {
                         <p>Login</p>
                     </Link>
                 </div>}
-
-
                 <div>{status}</div>
+
+                <Pagination postsPerPage={postsPerPage} totalPosts={forum?.posts.length} paginate={paginate} id={forum?._id}/>
+
                 {forum && forum.posts.length > 0 ?
-                    <div> {forum.posts.map((post, i) => <SingleReply key={i} post={post}/>)} </div> :
+                    <div>
+                        {checkIfForum().map((post, i) => <SingleReply key={i} post={post}/>).reverse()}
+                    </div> :
                     <div>This forum has no posts...</div>
                 }
             </div>

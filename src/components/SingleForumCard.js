@@ -33,6 +33,7 @@ const SingleForumCard = ({forum}) => {
     }
 
     const nav = useNavigate();
+
     // const navigateToSingleForum = () => {    //
     //     nav('/forum/' + forum._id);
     // }

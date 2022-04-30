@@ -33,17 +33,16 @@ const Favorites = () => {
         <div>
             {
                 getFavorites.length > 0 ? <div>
-                    <Container className="sm-responseFav m-responseFav sm-clmn favStyle">
+                    <Container className='d-flex column mt-5'>
                         {getFavorites.map((x, i) =>
-                            <SingleForumCard key={i} product={x}/>
+                            <SingleForumCard key={i} forum={x}/>
                         )}
                     </Container>
                 </div> : <div className="favStyle">
-                    <Container className="sm-responseFav m-responseFav"
+                    <Container
                                style={{display: "flex", width: "1000px", justifyContent: "center", marginRight: "10px"}}>
-                        <div className='d-flex flex-column justify-content-center align-items-center mt-5'>
-                            {/*<FaExclamationCircle className="fas fa-exclamation-circle"/>*/}
-                            <div className='info-message'>You do not have favorite forums</div>
+                        <div className='d-flex column mt-5'>
+                            <div>You do not have favorite forums</div>
                         </div>
                     </Container>
                 </div>

@@ -5,17 +5,26 @@ import SingleReply from "./SingleReply";
 import mainContext from "../context/mainContext";
 import Pagination from "./Pagination";
 
+// import io from "socket.io-client";
+// const socket = io.connect("http://localhost:4000")
+
 const SingleForumView = () => {
 
     const {_id} = useParams()
     const [forum, setForum] = useState(null)
-
     const [status, setStatus] = useState(null)
     const {user} = useContext(mainContext);
     const textRef = useRef()
 
-    // mano posts = forum.posts array
+    // SOCKET
+    // const [getItem, setItem] = useState()
+    // const [getPost, setPost] = useState("")
+    // const idArr = _id.split('-')
+    // const splitId = idArr[idArr.length - 1]
+    //
 
+
+    // mano posts = forum.posts, PAGINATION
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setsPostPerPage] = useState(5)
     const indexOfLastPost = currentPage * postsPerPage
@@ -24,16 +33,27 @@ const SingleForumView = () => {
 
     useEffect(() => {
         http.get("/get-single-forum/"+_id).then(res => {
-            // http.get(`/get-single-forum/${_id}/${currentPage}`)
             if (res.success) {
                 setForum(res.forum)
-                // setPostsAmount(res.forum.posts.length)
-                // console.log(res.forum)
-                // console.log(res.forum.posts)
             }
         })
-
     }, [])
+
+    // Fetch Single Product //
+    // async function getSingleForum() {
+    //     const data = await http.get("/get-single-forum/" + splitId)
+    //     if (data.success) {
+    //         return setItem(data.forum)
+    //     }
+    // }
+    // useEffect(() => {
+    //     socket.emit("join_auction", splitId)
+    //     return getSingleForum()
+    // }, [])
+    //
+    // useEffect(() => {
+    //     return getSingleForum();
+    // }, [_id]);
 
     function checkIfForum() {
         if (forum) {
@@ -43,10 +63,7 @@ const SingleForumView = () => {
         }
     }
 
-    // console.log(checkIfForum())
-
     const paginate = pageNumber => setCurrentPage(pageNumber)
-
 
     async function postReply() {
         const newPost = {
@@ -64,10 +81,19 @@ const SingleForumView = () => {
         } else {
             setStatus(data.message)
         }
+        // await socket.emit("new_post", newPost)
     }
+    // useEffect(() => {
+    //     socket.on("update_product", (data) => {
+    //         console.log(data[0])
+    //         setItem(data[0])
+    //         setPost(data[0].posts)
+    //     })
+    // }, [socket])
+
+
 
     return (
-
         <div>
             <div>
                 {forum && <h3>Forum: {forum.title}</h3>}

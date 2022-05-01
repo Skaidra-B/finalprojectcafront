@@ -14,12 +14,15 @@ import SingleForumPage from "./pages/SingleForumPage";
 import http from "./plugins/http";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+// import io from "socket.io-client";
+
 function App() {
 
     const [user, setUser] = useState(null)
     const [getForums, setForums] = useState([])
     const [getFavorites, setFavorites] = useState([])
     const [getFavoritesIds, setFavoritesIds] = useState([])
+
 
 
     useEffect(() => {
@@ -59,24 +62,10 @@ function App() {
                 <Route path='/login' element={<LoginPage/>}/>
                 <Route path='/upload' element={<UploadPage/>}/>
                 {/*<Route path='/forum/:id' element={<ForumPage/>}/>*/}
-
                 <Route path='/forum/:_id' element={<SingleForumPage/>}/>
                 {/*<Route path='/forum/:_id/page=:number' element={<SingleForumPage/>}/>*/}
-
                 <Route path='/profile' element={<ProfilePage/>}/>
                 <Route path='/favorites' element={<FavoritesPage/>}/>
-
-                {/*<Route path='/aukcionas/:id' element={<SingleProductPage/>}/>*/}
-                {/*<Route path='/ikelti-aukciona' element={<CreateAuctionPage/>}/>*/}
-                {/*<Route path='/vartotojas/:username' element={<OtherUserPage/>}/>*/}
-                {/*<Route path='/stebimi' element={<AuctionsPreviewPage/>}/>*/}
-                {/*<Route path='/taisykles' element={<RulesPage/>}/>*/}
-                {/*<Route path='/kaiptaiveikia' element={<HowItWorksPage/>}/>*/}
-                {/*<Route path='/megstamiausi' element={<FavoritesPage/>}/>*/}
-                {/*<Route path='/aukcionai/:category' element={<CategoryPage/>}/>*/}
-                {/*<Route path='/aukcionai/:category/:subCategory' element={<SubcategoryPage/>}/>*/}
-                {/*<Route path='/elpasto-pranesimai' element={<EmailNotifyPage/>}/>*/}
-                {/*<Route path='/paieska/:title' element={<SearchPage/>}/>*/}
             </Routes>
         </Router>
     </mainContext.Provider>);

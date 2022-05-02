@@ -4,6 +4,7 @@ import SingleForumCard from "./SingleForumCard";
 import SingleReply from "./SingleReply";
 import http from "../plugins/http";
 import SingleReplyInUserAccount from "./SingleReplyInUserAccount";
+import {Container} from "react-bootstrap";
 
 const UserProfileHeader = () => {
 
@@ -40,34 +41,33 @@ const UserProfileHeader = () => {
     // const userPostsOnly = userPosts[0].filter(x => x.posterId === user._id)
     // console.log(userPostsOnly)
 
-
-
-
     return (
-        <div className='user-profile-header'>
-            <div className="d-flex j-space-btw">
-                <div
-                    className={getState === 1 ? "tabs color" : "tabs"}
-                    onClick={() => selectedTab(1)}>
-                    Created Forums
+        <Container fluid="lg pb-5">
+            <div className='user-profile-header'>
+                <div className="d-flex j-space-btw">
+                    <div
+                        className={getState === 1 ? "tabs color" : "tabs"}
+                        onClick={() => selectedTab(1)}>
+                        Created Forums ({userUploadedForums.length})
+                    </div>
+                    <div
+                        className={getState === 2 ? "tabs color" : "tabs"}
+                        onClick={() => selectedTab(2)}>
+                        Replies
+                    </div>
                 </div>
-                <div
-                    className={getState === 2 ? "tabs color" : "tabs"}
-                    onClick={() => selectedTab(2)}>
-                    Replies
+                <div>
+                    <div
+                        className={getState === 1 ? "content d-block" : "content"}>
+                        {userUploadedForums.map((forum, i) => <SingleForumCard forum={forum} key={forum._id}/>).reverse()}
+                    </div>
+                    <div
+                        className={getState === 2 ? "content d-block" : "content"}>
+                        {userUploadedPosts.map((post, i) => <SingleReplyInUserAccount post={post} key={i}/>).reverse()}
+                    </div>
                 </div>
             </div>
-            <div>
-                <div
-                    className={getState === 1 ? "content d-block" : "content"}>
-                    {userUploadedForums.map((forum, i) => <SingleForumCard forum={forum} key={forum._id}/>)}
-                </div>
-                <div
-                    className={getState === 2 ? "content d-block" : "content"}>
-                    {userUploadedPosts.map((post, i) => <SingleReplyInUserAccount post={post} key={i}/>)}
-                </div>
-            </div>
-        </div>
+        </Container>
     );
 };
 

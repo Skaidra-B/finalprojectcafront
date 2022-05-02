@@ -2,10 +2,11 @@ import React, {useContext, useRef, useState} from 'react';
 import http from "../plugins/http";
 import mainContext from "../context/mainContext";
 import {useNavigate} from "react-router-dom";
+import {Container} from "react-bootstrap";
 
 const Login = () => {
 
-    const {setUser} = useContext(mainContext)
+    const {setUser, setUserNotifications} = useContext(mainContext)
 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -25,6 +26,7 @@ const Login = () => {
         if (data.success) {
             setUser(data.user)
             setStatus(null)
+            setUserNotifications(data.user.notifications)
             nav("/")
             if (stayLoggedIn) return localStorage.setItem("stayLoggedIn", "true")
             console.log(data.user.username)
@@ -33,24 +35,26 @@ const Login = () => {
         }
     }
     return (
-        <div className="d-flex column">
-            <div className="j-center d-flex">
-                <input type="text" ref={emailRef} placeholder="email"/>
+        <Container fluid="lg">
+            <div className="auth">
+                <div className="j-center d-flex">
+                    <input type="text" ref={emailRef} placeholder="Email"/>
+                </div>
+                <div className="j-center d-flex">
+                    <input type="text" ref={passwordRef} placeholder="Password"/>
+                </div>
+                <div className="j-center d-flex">
+                    <label htmlFor="check2" className={'auto-login-label'}>Log me in automatically</label>
+                    <input onChange={() => setStayLoggedIn(!stayLoggedIn)} type="checkbox" id="check2"/>
+                </div>
+                <div className="j-center d-flex">
+                    <button onClick={auth} className={'auth-button'}>Login</button>
+                </div>
+                <div className="j-center d-flex">
+                    <div>{status}</div>
+                </div>
             </div>
-            <div className="j-center d-flex">
-                <input type="text" ref={passwordRef} placeholder="password"/>
-            </div>
-            <div className="j-center d-flex">
-                <label htmlFor="check2">Log me in automatically</label>
-                <input onChange={() => setStayLoggedIn(!stayLoggedIn)} type="checkbox" id="check2"/>
-            </div>
-            <div className="j-center d-flex">
-                <button onClick={auth}>Login</button>
-            </div>
-            <div className="j-center d-flex">
-                <div>{status}</div>
-            </div>
-        </div>
+        </Container>
     );
 };
 

@@ -9,7 +9,7 @@ const Favorites = () => {
 
     const {getFavorites, setFavorites, getFavoritesIds} = useContext(mainContext)
 
-    useEffect( () => {
+    useEffect(() => {
         async function favorites() {
             const allPostData = await http.get('/get-all-forums')
             if (allPostData.success) {
@@ -26,26 +26,28 @@ const Favorites = () => {
                 }
             }
         }
+
         favorites()
     }, [getFavoritesIds])
 
     return (
         <div>
             {
-                getFavorites.length > 0 ? <div>
-                    <Container className='d-flex column mt-5'>
-                        {getFavorites.map((x, i) =>
-                            <SingleForumCard key={i} forum={x}/>
-                        )}
-                    </Container>
-                </div> : <div className="favStyle">
-                    <Container
-                               style={{display: "flex", width: "1000px", justifyContent: "center", marginRight: "10px"}}>
-                        <div className='d-flex column mt-5'>
-                            <div>You do not have favorite forums</div>
-                        </div>
-                    </Container>
-                </div>
+                getFavorites.length > 0 ?
+
+                        <Container fluid="lg" className='d-flex column mt-5'>
+                            {getFavorites.map((x, i) =>
+                                <SingleForumCard key={i} forum={x}/>
+                            )}
+                        </Container>
+                    :
+                        <Container fluid="lg"
+                                   style={{
+                                       display: "flex",
+                                       justifyContent: "center"
+                                   }}>
+                                <div className='d-flex column mt-5'>You do not have favorite forums</div>
+                        </Container>
             }
         </div>
     );

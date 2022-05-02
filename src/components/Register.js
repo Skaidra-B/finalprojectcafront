@@ -1,5 +1,7 @@
 import React, {useRef, useState} from 'react';
 import http from "../plugins/http";
+import {Container} from "react-bootstrap";
+import SingleForumCard from "./SingleForumCard";
 
 
 const Register = () => {
@@ -28,29 +30,29 @@ const Register = () => {
     }
 
     return (
+        <Container fluid="lg">
+            <div className="auth">
+                <div className="j-center d-flex">
+                    <input type="text" ref={usernameRef} placeholder="Username"/>
+                </div>
+                <div className="j-center d-flex">
+                    <input type="text" ref={emailRef} placeholder="Email"/>
+                </div>
+                <div className="j-center d-flex">
+                    <input type="text" ref={pass1Ref} placeholder="Password"/>
+                </div>
+                <div className="j-center d-flex">
+                    <input type="text" ref={pass2Ref} placeholder="Confirm password"/>
+                </div>
 
-        <div className="d-flex column">
-            <div className="j-center d-flex">
-                <input type="text" ref={usernameRef} placeholder="Username"/>
+                <div className="j-center d-flex">
+                    <button onClick={auth} className={'auth-button'}>Register</button>
+                </div>
+                <div className="j-center d-flex">
+                    <div>{status}</div>
+                </div>
             </div>
-            <div className="j-center d-flex">
-                <input type="text" ref={emailRef} placeholder="Email"/>
-            </div>
-            <div className="j-center d-flex">
-                <input type="text" ref={pass1Ref} placeholder="Password"/>
-            </div>
-            <div className="j-center d-flex">
-                <input type="text" ref={pass2Ref} placeholder="Password repeat"/>
-            </div>
-
-            <div className="j-center d-flex">
-                <button onClick={auth}>Register</button>
-            </div>
-            <div className="j-center d-flex">
-                <div>{status}</div>
-            </div>
-        </div>
-
+        </Container>
     );
 };
 

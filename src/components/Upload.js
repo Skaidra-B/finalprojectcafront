@@ -1,15 +1,18 @@
-import React, {useContext, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import http from "../plugins/http";
 import mainContext from "../context/mainContext"
-import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+
 
 const Upload = () => {
 
-    const {user} = useContext(mainContext)
-    const nav = useNavigate()
+    const {user, setShowUpload} = useContext(mainContext)
     const titleRef = useRef()
-    // const textRef = useRef()
     const [status, setStatus] = useState(null)
+
+    // useEffect(() =>{
+    //     setShowUpload(false)
+    // }, [])
 
 
     async function sendRequest() {
@@ -22,22 +25,31 @@ const Upload = () => {
         // console.log(data)
         if (data.success) {
             setStatus(null)
-            nav("/")
+            setShowUpload(false)
         } else {
             setStatus(data.message)
-
         }
     }
 
     return (
         <div>
-            <div>Post a new Forum</div>
-            <div>Title:</div>
-            <input type="text" ref={titleRef}/>
-            {/*<div>Text:</div>*/}
-            {/*<textarea name="" id="" cols="30" rows="10" ref={textRef}/>*/}
-            <div>{status}</div>
-            <button onClick={sendRequest}>Submit</button>
+            {user?
+                <div>
+                    <div>Start a new Forum</div>
+                    <input type="text" ref={titleRef} placeholder="Enter forum title" className={'mt-1'} style={{width: "400px"}}/>
+                    <div>{status}</div>
+                    <div>
+                        <button onClick={() => setShowUpload(false)} className={'reply-button me-3'}>Cancel</button>
+                        <button onClick={sendRequest} className={'reply-button'}>Submit</button>
+                    </div>
+                </div> :
+                <div className={'d-flex'}>
+                    <div className={'me-1'}>Login to create new forum</div>
+                    <Link to="/login" >
+                        <div>Login</div>
+                    </Link>
+                </div>
+            }
         </div>
     );
 };

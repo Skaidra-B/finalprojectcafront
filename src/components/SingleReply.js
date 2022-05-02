@@ -7,8 +7,6 @@ const SingleReply = ({post}) => {
     let embedId
     let pic
 
-    // const {setUser, user} = useContext(mainContext)
-
     let arr = post.text.split(' ')
 
     function matchYoutubeUrl(url) {
@@ -41,10 +39,9 @@ const SingleReply = ({post}) => {
 
     return (
         <div className={'reply-card'}>
-            <div>{post.username}</div>
-            <div>{new Date(post.time).toLocaleDateString("lt-LT")} {new Date(post.time).toLocaleTimeString("lt-LT")}</div>
-
-            <img className={'userPhoto-for-card'} src={post.posterImg} alt=""/>
+            <h5 className={'ms-4'}>{post.username}</h5>
+            <div >{new Date(post.time).toLocaleDateString("lt-LT")} {new Date(post.time).toLocaleTimeString("lt-LT")}</div>
+            <img className={'userPhoto-for-card ms-4'} src={post.posterImg} alt=""/>
             <div>
                 <div>{post.text}</div>
                 {embedId !== undefined &&

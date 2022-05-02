@@ -13,6 +13,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import SingleForumPage from "./pages/SingleForumPage";
 import http from "./plugins/http";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Pagination from "./components/Pagination";
 
 // import io from "socket.io-client";
 
@@ -22,6 +23,8 @@ function App() {
     const [getForums, setForums] = useState([])
     const [getFavorites, setFavorites] = useState([])
     const [getFavoritesIds, setFavoritesIds] = useState([])
+    const [showUpload, setShowUpload] = useState(false)
+    const [userNotifications, setUserNotifications] = useState([])
 
 
 
@@ -52,6 +55,8 @@ function App() {
         getFavorites, setFavorites,
         getFavoritesIds, setFavoritesIds,
         getForums, setForums,
+        showUpload, setShowUpload,
+        userNotifications, setUserNotifications
 
     }}>
         <Router>
@@ -60,9 +65,13 @@ function App() {
                 <Route path='/' element={<IndexPage/>}/>
                 <Route path='/register' element={<RegisterPage/>}/>
                 <Route path='/login' element={<LoginPage/>}/>
-                <Route path='/upload' element={<UploadPage/>}/>
-                {/*<Route path='/forum/:id' element={<ForumPage/>}/>*/}
-                <Route path='/forum/:_id' element={<SingleForumPage/>}/>
+                {/*<Route path='/upload' element={<UploadPage/>}/>*/}
+
+                {/*<Route path='/forum/:_id' element={<SingleForumPage/>}/>*/}
+
+                <Route path='/forum/:_id' element={<SingleForumPage/>}>
+                    <Route path='/forum/:_id/:num' element={<Pagination/>}/>
+                </Route>
                 {/*<Route path='/forum/:_id/page=:number' element={<SingleForumPage/>}/>*/}
                 <Route path='/profile' element={<ProfilePage/>}/>
                 <Route path='/favorites' element={<FavoritesPage/>}/>

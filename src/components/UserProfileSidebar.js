@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import mainContext from "../context/mainContext";
-import {Button, Modal} from "react-bootstrap";
+import {Button, Container, Modal} from "react-bootstrap";
 import http from "../plugins/http";
 
 const UserProfileSidebar = () => {
@@ -40,31 +40,32 @@ const UserProfileSidebar = () => {
 
 
     return (
-        <div className={'user-profile-sidebar'}>
-            <img className="userPhoto" src={user?.image} alt=""/>
-            <p className="profile-username">{user?.username}</p>
+        <Container>
+            <div className={'user-profile-sidebar mb-3'}>
+                <img className="userPhoto" src={user?.image} alt=""/>
+                <h5 className="mt-4 mb-4">{user?.username}</h5>
 
-            <button onClick={handleShowMessageModal}>Change profile picture</button>
+                <button onClick={handleShowMessageModal} style={{backgroundColor: '#B9D9EB'}}>Change profile picture</button>
 
-            <Modal show={showMessageModal} onHide={handleCloseMessageModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Change you profile picture</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <input ref={pictureRef} placeholder="Enter picture URL here"/>
-                    <div>{status}</div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseMessageModal}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={changePicture}>
-                        Confirm
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-        </div>
+                <Modal show={showMessageModal} onHide={handleCloseMessageModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Change you profile picture</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <input ref={pictureRef} placeholder="Enter picture URL here"/>
+                        <div>{status}</div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseMessageModal}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={changePicture}>
+                            Confirm
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        </Container>
     );
 };
 

@@ -40,7 +40,7 @@ const UserProfileHeader = () => {
     return (
         <Container fluid="lg pb-5">
             <div className='user-profile-header'>
-                <div className="d-flex j-space-btw">
+                <div     className="d-flex j-space-btw">
                     <div
                         className={getState === 1 ? "tabs color" : "tabs"}
                         onClick={() => selectedTab(1)}>
@@ -59,7 +59,7 @@ const UserProfileHeader = () => {
                     </div>
                     <div
                         className={getState === 2 ? "content d-block" : "content"}>
-                        {userUploadedPosts.map((post, i) => <SingleReplyInUserAccount post={post} key={i}/>).reverse()}
+                        {userUploadedPosts.map((post, i) => <SingleReplyInUserAccount post={post} key={i} index={i}/>).reverse()}
                     </div>
                 </div>
             </div>

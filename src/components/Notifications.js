@@ -14,8 +14,8 @@ const Notifications = ({notification}) => {
         const notificationDeleted = await http.get('/delete-notification/'+ notification._id)
         console.log(notificationDeleted)
         if (notificationDeleted.success) {
-            userNotifications.filter((x => x._id !== notification._id))
-            setUserNotifications([...userNotifications])
+            const result = userNotifications.filter((x => x._id !== notification._id))
+            setUserNotifications([...result])
         }
     }
 

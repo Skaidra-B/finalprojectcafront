@@ -3,8 +3,8 @@ import {Link, useParams} from "react-router-dom";
 import http from "../plugins/http";
 import SingleReply from "./SingleReply";
 import mainContext from "../context/mainContext";
-import Pagination from "./Pagination";
 import {Container} from "react-bootstrap";
+import PostsMapping from "./PostsMapping";
 
 // import io from "socket.io-client";
 // const socket = io.connect("http://localhost:4000")
@@ -18,18 +18,34 @@ const SingleForumView = () => {
     const textRef = useRef()
 
     // SOCKET
-    const [getItem, setItem] = useState()
-    const [getPost, setPost] = useState("")
-    const idArr = _id.split('-')
-    const splitId = idArr[idArr.length - 1]
-    // console.log(splitId) // 6270c3bd4534ea6e0735134d
+    // const [getItem, setItem] = useState()
+    // const [getPost, setPost] = useState("")
+    // const idArr = _id.split('-')
+    // const splitId = idArr[idArr.length - 1]
 
-
-    // mano posts = forum.posts, PAGINATION
+    // PAGINATION
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setsPostPerPage] = useState(10)
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const totalPosts = forum?.posts.length
+
+    const pageNumbers = []
+    for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+        pageNumbers.push(i)
+    }
+
+    const paginate = pageNumber => setCurrentPage(pageNumber)
+
+    let url = ("/forum/" + forum?._id + "/" )
+
+    function checkIfForum() {
+        if (forum) {
+            return forum.posts.slice(indexOfFirstPost, indexOfLastPost)
+        } else {
+            return forum.posts
+        }
+    }
 
 
     useEffect(() => {
@@ -56,15 +72,14 @@ const SingleForumView = () => {
     //     return getSingleForum();
     // }, [_id]);
 
-    // function checkIfForum() {
-    //     if (forum) {
-    //         return forum.posts.slice(indexOfFirstPost, indexOfLastPost)
-    //     } else {
-    //         return forum.posts
-    //     }
-    // }
+    // useEffect(() => {
+    //     socket.on("update_product", (data) => {
+    //         console.log(data[0])
+    //         setItem(data[0])
+    //         setPost(data[0].posts)
+    //     })
+    // }, [socket])
 
-    // const paginate = pageNumber => setCurrentPage(pageNumber)
 
     async function postReply() {
         const newPost = {
@@ -75,7 +90,6 @@ const SingleForumView = () => {
             text: textRef.current.value
         }
         const data = await http.post(newPost, "/reply-to-forum")
-        console.log(data)
         if (data.success) {
             setStatus(null)
             textRef.current.value = ""
@@ -84,14 +98,6 @@ const SingleForumView = () => {
         }
         // await socket.emit("new_post", newPost)
     }
-
-    // useEffect(() => {
-    //     socket.on("update_product", (data) => {
-    //         console.log(data[0])
-    //         setItem(data[0])
-    //         setPost(data[0].posts)
-    //     })
-    // }, [socket])
 
 
     return (
@@ -111,7 +117,16 @@ const SingleForumView = () => {
                     </div>}
                 <div>{status}</div>
 
-                <Pagination forum={forum} postsPerPage={postsPerPage} totalPosts={forum?.posts.length}/>
+
+                <nav>
+                    <ul className={'pagination'}>
+                        {pageNumbers.map(number => (
+                            <li key={number} className={'page-item'}>
+                                <a onClick={() => paginate(number)} href={url + number} className={'page-link'}>{number}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
 
                 {/*{forum && forum.posts.length > 0 ?*/}
                 {/*    <div>*/}
@@ -119,6 +134,8 @@ const SingleForumView = () => {
                 {/*    </div> :*/}
                 {/*    <div>This forum has no posts...</div>*/}
                 {/*}*/}
+
+                <PostsMapping forum={forum} checkIfForum={checkIfForum}/>
             </div>
         </Container>
     );

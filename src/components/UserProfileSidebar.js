@@ -32,7 +32,7 @@ const UserProfileSidebar = () => {
 
 
     return (
-        <Container>
+        <Container fluid="lg pb-5">
             <div className={'user-profile-sidebar mb-3'}>
                 <img className="userPhoto" src={user?.image} alt=""/>
                 <h5 className="mt-4 mb-4">{user?.username}</h5>

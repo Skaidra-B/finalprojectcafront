@@ -1,6 +1,4 @@
 import React, {useContext} from 'react';
-import mainContext from "../context/mainContext";
-
 
 const SingleReply = ({post}) => {
 

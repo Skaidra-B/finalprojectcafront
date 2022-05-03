@@ -6,8 +6,6 @@ import Toolbar from "./components/Toolbar";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import IndexPage from "./pages/IndexPage";
-import UploadPage from "./pages/UploadPage";
-import ForumPage from "./pages/ForumPage";
 import ProfilePage from "./pages/ProfilePage";
 import FavoritesPage from "./pages/FavoritesPage";
 import SingleForumPage from "./pages/SingleForumPage";
@@ -25,7 +23,6 @@ function App() {
     const [getFavoritesIds, setFavoritesIds] = useState([])
     const [showUpload, setShowUpload] = useState(false)
     const [userNotifications, setUserNotifications] = useState([])
-
 
 
     useEffect(() => {
@@ -66,9 +63,7 @@ function App() {
                 <Route path='/register' element={<RegisterPage/>}/>
                 <Route path='/login' element={<LoginPage/>}/>
                 {/*<Route path='/upload' element={<UploadPage/>}/>*/}
-
                 {/*<Route path='/forum/:_id' element={<SingleForumPage/>}/>*/}
-
                 <Route path='/forum/:_id' element={<SingleForumPage/>}>
                     <Route path='/forum/:_id/:num' element={<Pagination/>}/>
                 </Route>

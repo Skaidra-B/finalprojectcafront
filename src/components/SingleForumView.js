@@ -6,7 +6,6 @@ import mainContext from "../context/mainContext";
 import Pagination from "./Pagination";
 import {Container} from "react-bootstrap";
 
-
 // import io from "socket.io-client";
 // const socket = io.connect("http://localhost:4000")
 
@@ -19,11 +18,11 @@ const SingleForumView = () => {
     const textRef = useRef()
 
     // SOCKET
-    // const [getItem, setItem] = useState()
-    // const [getPost, setPost] = useState("")
-    // const idArr = _id.split('-')
-    // const splitId = idArr[idArr.length - 1]
-    //
+    const [getItem, setItem] = useState()
+    const [getPost, setPost] = useState("")
+    const idArr = _id.split('-')
+    const splitId = idArr[idArr.length - 1]
+    // console.log(splitId) // 6270c3bd4534ea6e0735134d
 
 
     // mano posts = forum.posts, PAGINATION
@@ -41,7 +40,7 @@ const SingleForumView = () => {
         })
     }, [])
 
-    // Fetch Single Product //
+    // // Fetch Single Product //
     // async function getSingleForum() {
     //     const data = await http.get("/get-single-forum/" + splitId)
     //     if (data.success) {

@@ -29,7 +29,7 @@ const Login = () => {
             setUserNotifications(data.user.notifications)
             nav("/")
             if (stayLoggedIn) return localStorage.setItem("stayLoggedIn", "true")
-            console.log(data.user.username)
+
         } else {
             setStatus(data.message)
         }

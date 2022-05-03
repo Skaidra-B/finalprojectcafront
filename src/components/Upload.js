@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import http from "../plugins/http";
 import mainContext from "../context/mainContext"
 import {Link} from "react-router-dom";
@@ -10,11 +10,6 @@ const Upload = () => {
     const titleRef = useRef()
     const [status, setStatus] = useState(null)
 
-    // useEffect(() =>{
-    //     setShowUpload(false)
-    // }, [])
-
-
     async function sendRequest() {
         const newForum = {
             ownerId: user._id,
@@ -22,7 +17,7 @@ const Upload = () => {
             title: titleRef.current.value
         }
         const data = await http.post(newForum, "/upload")
-        // console.log(data)
+
         if (data.success) {
             setStatus(null)
             setShowUpload(false)

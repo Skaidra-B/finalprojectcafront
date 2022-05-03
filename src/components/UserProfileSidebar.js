@@ -1,15 +1,11 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import mainContext from "../context/mainContext";
 import {Button, Container, Modal} from "react-bootstrap";
 import http from "../plugins/http";
 
 const UserProfileSidebar = () => {
 
-    // useEffect(() => {
-    //
-    // }, [user.image])
-
-    const {setUser, setForums, user} = useContext(mainContext)
+    const {user} = useContext(mainContext)
 
     const [showMessageModal, setShowMessageModal] = useState(false)
     const [status, setStatus] = useState(null)
@@ -26,16 +22,12 @@ const UserProfileSidebar = () => {
             picture: pictureRef.current.value
         }
         const data = await http.post(picture, "/change-picture")
-        // console.log(data)
         if (data.success) {
             setStatus(null)
-            // setUser(data.refreshUsers)
-            // setForums(data.refreshForums)
             setShowMessageModal(false)
         } else {
             setStatus(data.message)
         }
-
     }
 
 

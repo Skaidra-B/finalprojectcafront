@@ -1,8 +1,6 @@
 import React, {useRef, useState} from 'react';
 import http from "../plugins/http";
 import {Container} from "react-bootstrap";
-import SingleForumCard from "./SingleForumCard";
-
 
 const Register = () => {
     const usernameRef = useRef()
@@ -20,12 +18,11 @@ const Register = () => {
             passTwo: pass2Ref.current.value,
         }
         const data = await http.post(user, "/register")
-        // console.log(data)
         if(!data.success) {
             setStatus(data.error)
         } else {
             setStatus(data.message)
-            console.log(data)
+            // console.log(data)
         }
     }
 
@@ -44,7 +41,6 @@ const Register = () => {
                 <div className="j-center d-flex">
                     <input type="text" ref={pass2Ref} placeholder="Confirm password"/>
                 </div>
-
                 <div className="j-center d-flex">
                     <button onClick={auth} className={'auth-button'}>Register</button>
                 </div>

@@ -7,7 +7,6 @@ const SingleReplyInUserAccount = ({post}) => {
 
     const userPostsOnly = post.posts.filter(x => x.posterId === user._id)
 
-
     let embedId2
     let pic
 
@@ -15,7 +14,6 @@ const SingleReplyInUserAccount = ({post}) => {
     for (i in arr) {
         arr = post.posts[i].text.split(' ')
     }
-
 
     // let arr = post.posts[0].text.split(' ')
 

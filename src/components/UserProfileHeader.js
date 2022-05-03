@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import mainContext from "../context/mainContext";
 import SingleForumCard from "./SingleForumCard";
-import SingleReply from "./SingleReply";
 import http from "../plugins/http";
 import SingleReplyInUserAccount from "./SingleReplyInUserAccount";
 import {Container} from "react-bootstrap";
@@ -22,11 +21,9 @@ const UserProfileHeader = () => {
             if (user?._id) {
                 const uploadedForums = await http.get('/get-uploaded-forums/' + user?._id)
                 if (uploadedForums.success) setUserUploadedForums(uploadedForums.uploadedForums)
-                // console.log(uploadedForums)
 
                 const uploadedPosts = await http.get('/get-posts/' + user?._id)
                 if (uploadedPosts.success) setUserUploadedPosts(uploadedPosts.uploadedPosts)
-                // console.log(uploadedPosts)
             }
         }
         getForums()
@@ -35,7 +32,6 @@ const UserProfileHeader = () => {
 
     // console.log(user._id, typeof(user._id)) //626bb3b3232e1f4c9f099516 string
     // const userPosts = userUploadedPosts.map(x => x.posts)
-    // console.log(userPosts)
     // console.log(userPosts[0])
     //
     // const userPostsOnly = userPosts[0].filter(x => x.posterId === user._id)

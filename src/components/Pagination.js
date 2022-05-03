@@ -28,7 +28,6 @@ const Pagination = ({forum, postsPerPage, totalPosts}) => {
     return (
         <div>
             <nav>
-
                 <ul className={'pagination'}>
                     {pageNumbers.map(number => (
                         <li key={number} className={'page-item'}>
@@ -44,7 +43,6 @@ const Pagination = ({forum, postsPerPage, totalPosts}) => {
                 <div>This forum has no posts...</div>
             }
         </div>
-
     );
 };
 

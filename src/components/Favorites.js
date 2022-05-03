@@ -6,7 +6,6 @@ import SingleForumCard from "./SingleForumCard";
 
 const Favorites = () => {
 
-
     const {getFavorites, setFavorites, getFavoritesIds} = useContext(mainContext)
 
     useEffect(() => {

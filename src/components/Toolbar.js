@@ -5,9 +5,9 @@ import http from "../plugins/http";
 import {Container} from "react-bootstrap";
 import { BsFillEnvelopeFill } from "react-icons/bs";
 import { BsFillEnvelopeOpenFill } from "react-icons/bs";
+import Notifications from "./Notifications";
 
 const Toolbar = () => {
-
 
     const {user, setUser, showUpload, setShowUpload, getFavoritesIds, userNotifications} = useContext(mainContext);
     const [getCount, setCount] = useState(0);
@@ -54,7 +54,6 @@ const Toolbar = () => {
                         <Link to="/favorites" className={'toolbar-link'}>
                             <h5>Favorites ({getCount})</h5>
                         </Link>
-
                     </div>}
                     {user && <div className={'d-flex'}>
                         <Link to="/" className={'toolbar-link'} onClick={() => setShowUpload(true)}>
@@ -67,11 +66,14 @@ const Toolbar = () => {
                             <h5>Favorites ({getCount})</h5>
                         </Link>
 
-                        <BsFillEnvelopeFill onClick={showNotifications}/>
-                        {showNots && <div className={'notification-card'}>
-                            notificaijos
+                        {showNots? <h5 className={'notification'}><BsFillEnvelopeOpenFill className={'icon'} onClick={showNotifications}/>({userNotifications.length})</h5> : <h5 className={'notification'}><BsFillEnvelopeFill className={'icon'} onClick={() =>setShowNots(!showNots)}/>({userNotifications.length})</h5>}
+                        {showNots &&
+                            <div className={'notification-card'}>
+                            {userNotifications.length > 0?
+                                <div>
+                                    {userNotifications.map((notification, i) => <Notifications key={i} notification={notification}/>)}
+                                </div> : <p>You don't have notifications</p>}
                         </div>}
-
                         <button onClick={sendRequest} className={'log-out-button'}>Logout</button>
                     </div>}
                 </div>

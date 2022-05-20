@@ -13,7 +13,6 @@ import http from "./plugins/http";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PostsMapping from "./components/PostsMapping";
 
-// import io from "socket.io-client";
 
 function App() {
 
@@ -65,7 +64,6 @@ function App() {
                 <Route path='/forum/:_id' element={<SingleForumPage/>}>
                     <Route path='/forum/:_id/:num' element={<PostsMapping/>}/>
                 </Route>
-                {/*<Route path='/forum/:_id/page=:number' element={<SingleForumPage/>}/>*/}
                 <Route path='/profile' element={<ProfilePage/>}/>
                 <Route path='/favorites' element={<FavoritesPage/>}/>
             </Routes>

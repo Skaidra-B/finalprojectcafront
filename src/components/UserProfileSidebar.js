@@ -5,7 +5,7 @@ import http from "../plugins/http";
 
 const UserProfileSidebar = () => {
 
-    const {user} = useContext(mainContext)
+    const {user, setUser} = useContext(mainContext)
 
     const [showMessageModal, setShowMessageModal] = useState(false)
     const [status, setStatus] = useState(null)
@@ -25,6 +25,7 @@ const UserProfileSidebar = () => {
         if (data.success) {
             setStatus(null)
             setShowMessageModal(false)
+            setUser(data.updated)
         } else {
             setStatus(data.message)
         }

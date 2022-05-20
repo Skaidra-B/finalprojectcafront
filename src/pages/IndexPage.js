@@ -9,21 +9,26 @@ const IndexPage = () => {
 
     const {getForums, setForums, showUpload} = useContext(mainContext)
 
-   useEffect(() => {
-       async function checkscheme() {
-           const allPostData = await http.get('/get-all-forums')
-           if (allPostData.success) setForums(allPostData.allForums)
+    useEffect(() => {
+        async function checkscheme() {
+            const allPostData = await http.get('/get-all-forums')
+            if (allPostData.success) setForums(allPostData.allForums)
 
-       }
-       checkscheme();
-   }, [])
+        }
+
+        checkscheme();
+    }, [])
+
+    useEffect(() => {
+
+    }, [getForums])
 
 
     return (
 
         <Container fluid="lg pb-5">
             {showUpload && <Upload/>}
-            {getForums.map((forum, i) =>  <SingleForumCard key={i} forum={forum}/>).reverse()}
+            {getForums.map((forum, i) => <SingleForumCard key={i} forum={forum}/>).reverse()}
         </Container>
     );
 };

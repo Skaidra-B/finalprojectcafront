@@ -30,12 +30,6 @@ const UserProfileHeader = () => {
 
     }, [user])
 
-    // console.log(user._id, typeof(user._id)) //626bb3b3232e1f4c9f099516 string
-    // const userPosts = userUploadedPosts.map(x => x.posts)
-    // console.log(userPosts[0])
-    //
-    // const userPostsOnly = userPosts[0].filter(x => x.posterId === user._id)
-    // console.log(userPostsOnly)
 
     return (
         <Container fluid="lg pb-5">
